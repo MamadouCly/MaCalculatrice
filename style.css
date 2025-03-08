@@ -42,11 +42,24 @@ button {
     min-height: 30px;
     cursor: pointer;
 }
-.btnEgal {
-    width: 100%;
+.btnEgal, .btnSup{
     background-color: #d3caca;
     border: none;
     font-size: 20px;
+    width: 50%;
+}
+.btnSup {
+    background-color: red;
+    color: white;
+}
+#btnSup1 {
+    background-color: rgb(173, 7, 7);
+    color: white;
+    border: none;
+    font-size: 20px;
+}
+.containerbtnsEgalEtSup {
+    display: flex;
 }
 .btns {
     display: grid;

@@ -25,52 +25,77 @@ btnEgal.addEventListener("click", () => {
     let indexDivi = t.indexOf("/");
 
     if (indexPlus !== -1) { // On vérifie si le signe "+" est bien dans le tableau. autrement dit s'il est clicqué par l'utilisateur
-        // Si c'est le cas, les codes suivant vont s'exécuter
+        // Si c'est le cas, les codes suivants vont s'exécuter
         let result = document.createElement("span");
 
         let avantPlus = t.slice(0, indexPlus).join(""); // Stockage des chiffres clicqués avant le signe "+" dans la variable
         let apresPlus = t.slice(indexPlus + 1).join(""); // Stockage des chiffres clicqués après le signe "+" dans la variable
 
-        result.textContent = Number(avantPlus) + Number(apresPlus); // On les transforme en nombres pour pouvoir faire d'addition. Sinon, on fera la concatenation
+        result.textContent = `= ${Number(avantPlus) + Number(apresPlus)}`; // On les transforme en nombres pour pouvoir faire l'addition. Sinon, on fera la concatenation
 
         result.classList.add("viewResult"); // On lui donne la classe "viewResult" définie dans le fichier "CSS"
 
-        view.appendChild(result); // On le résultat dans "view" || Une div définie dans le fichier "HTML"
+        view.appendChild(result); // On met le résultat dans "view" || Une "div" définie dans le fichier "HTML"
     } else if (indexMoin !== -1) {
-        // Le même processus est appliqué pour faire la sustraction
+        // La même procédure est appliquée pour faire la sustraction
         let result = document.createElement("span");
 
         let avantMoin = t.slice(0, indexMoin).join("");
         let apresMoin = t.slice(indexMoin + 1).join("");
 
-        result.textContent = Number(avantMoin) - Number(apresMoin);
+        result.textContent = `= ${Number(avantMoin) - Number(apresMoin)}`;
 
         result.classList.add("viewResult");
 
         view.appendChild(result);
     } else if (indexMult !== -1) {
-        // Le même processus est appliqué pour faire la multiplicatin
+        // La même procédure est appliquée pour faire la multiplicatin
         let result = document.createElement("span");
 
         let avantMult = t.slice(0, indexMult).join("");
         let apresMult = t.slice(indexMult + 1).join("");
 
-        result.textContent = Number(avantMult) * Number(apresMult);
+        result.textContent = `= ${Number(avantMult) * Number(apresMult)}`;
 
         result.classList.add("viewResult");
 
         view.appendChild(result);
     } else if (indexDivi !== -1) {
-        // Le même processus est appliqué pour faire la division
+        // La même procédure est appliquée pour faire la division
         let result = document.createElement("span");
 
         let avansDivi = t.slice(0, indexDivi).join("");
         let apresDivi = t.slice(indexDivi + 1).join("");
 
-        result.textContent = Number(avansDivi) / Number(apresDivi);
+        if(Number(avansDivi) !== 0 && Number(apresDivi) !== 0) {
+            result.textContent = `= ${Number(avansDivi) / Number(apresDivi)}`;
 
-        result.classList.add("viewResult");
+            result.classList.add("viewResult");
 
-        view.appendChild(result);
+            view.appendChild(result);
+        } else {
+            result.textContent = "= Impossible de diviser par 0";
+
+            //result.classList.add("viewResult");
+
+            view.appendChild(result);
+        }
     }
+});
+
+// Sélection des boutons "supprimer"
+const btnSup = document.querySelector(".btnSup");
+const btnSup1 = document.getElementById("btnSup1");
+
+// Ajout d'un gestionnaire d'événement "click" pour pouvoir supprimer des chiffres
+btnSup.addEventListener("click", () => {
+    view.textContent = "";
+    t = []; // Vide le tableau
+});
+
+// Ajout d'un gestionnaire d'événement "click" pour pouvoir supprimer le dernoer chiffre
+btnSup1.addEventListener("click", () => {
+    t.pop(); // Supprime le dernier élément du tableau
+
+    view.removeChild(view.lastChild); // Fait la mise à jour de l'écran en supprimant le dernier élément
 });
